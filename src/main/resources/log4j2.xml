@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="filename">C:/JavaProject/LogSavings/logs</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="logfile"
+                     fileName="${filename}/app.log"
+                     filePattern="${filename}/app-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern> %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="transportation" level="trace" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="logfile"/>
+        </Logger>
+        <Root level="trace">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="logfile"/>
+        </Root>
+    </Loggers>
+</Configuration>
